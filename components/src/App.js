@@ -3,17 +3,13 @@ import React from 'react';
 
 // global variables to change where necessary
 const DROPDOWN_API_ENDPOINT = 'https://jgvnzlk00j.execute-api.us-east-1.amazonaws.com/prod/'; // GET/POST REST API 
-const ML_API_ENDPOINT = 'https://p6wer3t1x4.execute-api.us-east-1.amazonaws.com/prod/'; // POST REST API
+const ML_API_ENDPOINT = 'https://5uzxda7pe9.execute-api.us-east-1.amazonaws.com/prod/'; // POST REST API
 
 
 // atob is deprecated but this function converts base64string to text string
 const decodeFileBase64 = (base64String) => {
   // From Bytestream to Percent-encoding to Original string
-  return decodeURIComponent(
-    atob(base64String).split("").map(function (c) {
-      return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join("")
-  );
+  return "data:image/jpg;base64," + base64String
 };
 
 
@@ -178,7 +174,14 @@ function App() {
       </div>
       <div className="Output">
         <h1>Results</h1>
-        <p>{outputFileData}</p>
+        <picture>
+        <center><div id="display_image">
+       < img src={outputFileData} alt="waiting for result..." 
+          width="152" 
+          height="152"/>
+     </div>
+     </center>
+     </picture>
       </div>
     </div>
   );
